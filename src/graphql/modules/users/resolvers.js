@@ -6,8 +6,8 @@ export default {
         fullname: (user)=> `${user.firstname} ${user.lastname}`
     },
     Query: {
-        users: ()=> User.find(),
-        user: (_, {id})=> User.findById(id)
+        users: ()=> User.findAll(),
+        user: (_, {id})=> User.findOne({where:{_id: id}})
     },
     Mutation: {
         createUser: async(_, {data}, {pubsub})=> {
@@ -19,8 +19,12 @@ export default {
 
             return user;
         },
-        updateUser: (_, {id, data})=>User.findOneAndUpdate(id, data, {new: true}), //Com a flag new são retornados os dados novo,
-        deleteUser: async(_, {id})=> !!(await User.findOneAndDelete(id))
+        updateUser: async(_, {id, data})=>{
+            const user = await User.findOne({where:{_id: id}});
+            const newUser = await user.update(data).save();
+            return newUser;
+        },
+        deleteUser: async(_, {id})=> !!(await (await User.findOne({where:{_id: id}})).destroy())
     },
     Subscription:{
         userAdded: {
