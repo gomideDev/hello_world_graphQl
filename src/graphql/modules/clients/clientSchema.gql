@@ -1,0 +1,21 @@
+type Client{
+    _id: ID!
+    name: String!
+    cpf: String!
+}
+
+input ClientInput{
+    name: String!
+    cpf: String!
+}
+
+type Query{
+    clients: [Client]!
+    client(id: ID): Client!
+}
+
+type Mutation{
+    createClient(data: ClientInput!): Client!
+    updateClient(id: ID!, data: ClientInput): Client
+    deleteClient(id: ID!): Boolean!
+}
