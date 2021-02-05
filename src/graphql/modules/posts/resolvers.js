@@ -3,15 +3,19 @@ import User from '../../../models/User'
 
 export default {
     Post:{
-        author:  (post)=> User.findById(post.author)
+        author:  (post)=> User.findOne({where:{_id: post._id}})
     },
     Query: {
-        posts: ()=> Post.find(),
-        post: (_, {id})=> Post.findById(id)
+        posts: ()=> Post.findAll(),
+        post: (_, {id})=> Post.findOne({where:{_id:id}})
     },
     Mutation: {
         createPost: (_, {data})=> Post.create(data),
-        updatePost: (_, {id, data})=>Post.findOneAndUpdate(id, data, {new: true}), //Com a flag new são retornados os dados novo,
-        deletePost: async(_, {id})=> !!(await Post.findOneAndDelete(id))
+        updatePost: async(_, {id, data})=>{
+            const post = await Post.findOne({where:{_id:id}});
+            const newPost = await (await post.update(data)).save();
+            return newPost;
+        }, //Com a flag new são retornados os dados novo,
+        deletePost: async(_, {id})=> !!(await (await Post.findOne({where:{_id:id}})).destroy())
     }
 }
