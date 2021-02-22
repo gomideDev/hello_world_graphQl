@@ -1,9 +1,5 @@
 import {ApolloServer, PubSub} from 'apollo-server';
-import mongoose from 'mongoose';
-import sequelize from './database' 
-import Client from './models/Client';
-import User from './models/User';
-import Post from './models/Post';
+
 
 function startServer({typeDefs, resolvers}){
     // mongoose.connect('mongodb://localhost:27017/graphql', {

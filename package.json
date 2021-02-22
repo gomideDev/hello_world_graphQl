@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "devstart": "npx nodemon --exec babel-node src/index.js -e js,gql",
     "test": "npx nodemon --exec babel-node src/index.js -e js,gql",
-    "start": "babel-node src/index.js"
+    "start": "babel-node ./src/index.js",
+    "build": "npm run clean && npm run babel-build",
+    "babel-build": "babel -d ./build ./src -s",
+    "clean": "mkdir build"
   },
   "keywords": [],
   "author": "",
