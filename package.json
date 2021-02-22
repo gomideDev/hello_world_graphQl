@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx nodemon --exec babel-node src/index.js -e js,gql"
+    "test": "npx nodemon --exec babel-node src/index.js -e js,gql",
+    "start": "npx nodemon --exec babel-node src/index.js -e js,gql"
   },
   "keywords": [],
   "author": "",

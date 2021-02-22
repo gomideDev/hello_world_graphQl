@@ -6,10 +6,10 @@ import User from './models/User';
 import Post from './models/Post';
 
 function startServer({typeDefs, resolvers}){
-    mongoose.connect('mongodb://localhost:27017/graphql', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true  
-    })
+    // mongoose.connect('mongodb://localhost:27017/graphql', {
+    //   useNewUrlParser: true,
+    //   useUnifiedTopology: true  
+    // })
     // console.log('MongoDb is connected!')
     // sequelize.authenticate().then(()=>{
     //   console.log('Database is connected with successfuly!')
